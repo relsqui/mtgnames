@@ -1,14 +1,14 @@
-### MTG Creatures
+## MTG Creature Name Analyzer
 
 These are some scripts I threw together to study the naming conventions of Magic creature cards. I release them into the public domain to the extent allowable by law. Extensive documentation fails a cost/benefit estimate pretty drastically, but here's a brief summary of what's in the repository and how to use it:
 
 
-#### Dependencies
+### Dependencies
 
 * The Natural Language Tool Kit. `pip install nltk` will set you up. If it nags you about missing data, open `python` and `import nltk`, then `nltk.download("name-of-thing-it-asked-for")`.
 
 
-#### Minimal Scripts You Need to Replicate My Data
+### Scripts You Need to Replicate My Data
 
 * `get_sets.py`: Create a directory for set data and fill it with JSON set files from mtgjson.com. (In retrospect, I could've done this with just the single all-cards file, but I needed the set files for my previous project so I had this script lying around.)
 * `tag_sets.sh`: For each set in the set directory, run it through the creature name tagger and put the output in the tagged sets directory.
@@ -23,21 +23,24 @@ These are some scripts I threw together to study the naming conventions of Magic
 * `parse_names.py`: Parse each creature name in a set, and output each name followed by its tags. See `tags` to learn what the tags mean. You can either give it a set code on the command line, or a JSON file as input, like the above.
 
 
-#### Static Files
+### Static Files
 
 * `target_patterns.grep`: A list of regular expressions to highlight in the summaries. You don't need to do anything with this, but you can change it if you're interested in other 
 * `tags`: Definitions of the Penn Treebank part-of-speech tags.
 * `ordered_sets.txt`: A list of Magic sets, in chronological order. This is just here so that other scripts can use it as a guide instead of listing things in lexographical order.
 
 
-#### Potential Improvements
+### Potential Improvements
 
 * Filter the sets more thoughtfully (excluding reprint-only sets, for example).
 * Exclude reprints altogether.
 * Catch a couple of errors produced by `tag_sets.sh` in special cases (mostly but not entirely unicode).
 
+### Why on Earth
 
-#### Other MTG Linguistics
+Mani Cavalieri [nerdsniped me](https://www.facebook.com/mani.cavalieri/posts/10106113073234039).
+
+### Other MTG Linguistics
 
 If you like this nonsense, you might also enjoy:
 

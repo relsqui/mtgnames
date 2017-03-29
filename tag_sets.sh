@@ -1,5 +1,6 @@
 #!/bin/bash
 
+mkdir -p tagged_sets
 for file in sets/*; do
     code="$(basename -s ".json" ${file})"
     echo "Tagging ${code}."

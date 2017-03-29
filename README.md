@@ -1,6 +1,6 @@
 ## MTG Creature Name Analyzer
 
-These are some scripts I threw together to study the naming conventions of Magic creature cards. I release them into the public domain to the extent allowable by law. Extensive documentation fails a cost/benefit estimate pretty drastically, but here's a brief summary of what's in the repository and how to use it:
+These are some scripts I ([Finn](mailto:relsqui@chiliahedron.com)) threw together to study the naming conventions of Magic creature cards. I release them into the public domain to the extent allowable by law. Extensive documentation fails a cost/benefit estimate pretty drastically, but here's a brief summary of what's in the repository and how to use it:
 
 
 ### Dependencies

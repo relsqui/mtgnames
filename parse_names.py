@@ -2,6 +2,8 @@
 
 import sys
 import nltk
+import creature_names as cn
+import split_words as sw
 
 class TaggedName(object):
     def __init__(self, name):
@@ -16,29 +18,29 @@ class TaggedName(object):
 
     def retag(self, word_tag):
         word, tag = word_tag
-        if not word[0].isalpha() or word.lower() in wordlist:
-            return (word, tag)
-        self.novel_words.add(word)
-        tag += "*"
+        action = sw.break_action(word)
+        if action:
+            tag += "-R"
+            word = action
+        if word[0].isalpha() and not word.lower() in sw.wordlist:
+            self.novel_words.add(word)
+            compounds = sw.break_compounds(word)
+            if compounds:
+                ctags = set()
+                for c in compounds:
+                    ctags.add("-".join(map(single_tag, c)))
+                tag = "/".join(ctags)
         return (word, tag)
 
-def clean_words():
-    words = set()
-    with open("/usr/share/dict/words") as f:
-        for word in f:
-            word = word[:-1]
-            if (word.isalpha() and word == word.lower() and
-               all(ord(c) < 128 for c in word)):
-                words.add(word)
-    return words.union(set(nltk.corpus.words.words()))
+def single_tag(word):
+    print word
+    return nltk.pos_tag([word])[0][1]
 
 def main():
     if len(sys.argv) > 1:
-        import creature_names as cn
         raw_names = cn.set_to_names(sys.argv[1])
     else:
         raw_names = sys.stdin.read().splitlines()
-    wordlist = clean_words()
     names = [TaggedName(name) for name in raw_names]
     novel = set.union(*(n.novel_words for n in names))
     print("\n".join(str(n) for n in names))

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 for code in $(cat ordered_sets.txt); do
-    if [[ ! -e "tagged_sets/unique/${code}" ]]; then
+    if [[ ! -e "tagged_sets/unique/${code}" || ! -e "tagged_sets/${code}" ]]; then
         echo "Skipping ${code}." >&2
         continue
     fi

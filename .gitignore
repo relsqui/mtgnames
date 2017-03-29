@@ -1,4 +1,4 @@
 *.pyc
 .*.swp
-sets/
-tagged_sets/
+sets
+tagged_sets

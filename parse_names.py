@@ -18,11 +18,9 @@ class TaggedName(object):
 
     def retag(self, word_tag):
         word, tag = word_tag
-        action = sw.break_action(word)
-        if action:
-            tag += "-R"
-            word = action
-        if word[0].isalpha() and not word.lower() in sw.wordlist:
+        word = word.lower()
+        compounds = []
+        if word[0].isalpha() and not word in sw.wordlist:
             self.novel_words.add(word)
             compounds = sw.break_compounds(word)
             if compounds:
@@ -30,10 +28,11 @@ class TaggedName(object):
                 for c in compounds:
                     ctags.add("-".join(map(single_tag, c)))
                 tag = "/".join(ctags)
+        if word.endswith("er"):
+            tag += "-R"
         return (word, tag)
 
 def single_tag(word):
-    print word
     return nltk.pos_tag([word])[0][1]
 
 def main():

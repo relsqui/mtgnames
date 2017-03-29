@@ -25,15 +25,20 @@ def break_compounds(word):
             compounds.append(tuple(parts))
     return compounds
 
-def break_action(word):
+def break_actors(word):
+    # Not actually using this right now, because it produces more false
+    # negatives than just checking if the word ends in -er produces false
+    # positives.
     if not (word.endswith("er") or word.endswith("or")):
-        return None
-    maybe_verb = word[:-1]
-    if nltk.pos_tag([maybe_verb])[0][1].startswith("V"):
-        return maybe_verb
-    maybe_verb = maybe_verb[:-1]
-    if nltk.pos_tag([maybe_verb])[0][1].startswith("V"):
-        return maybe_verb
-    return None
+        return []
+    word = word.lower()
+    test_words = set([word[:-1], word[:-2], word[:-2] + "e"])
+    for w in [word[:-1], word[:-2]]:
+        compounds = break_compounds(word)
+        for c in compounds:
+            test_words.add(c[1][:-1])
+            test_words.add(c[1][:-2])
+    print test_words
+    return filter(lambda w: nltk.pos_tag([w])[0][1].startswith("V"), test_words)
 
 wordlist = clean_words()

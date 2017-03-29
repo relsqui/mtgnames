@@ -32,7 +32,7 @@ def clean_words():
                 words.add(word)
     return words.union(set(nltk.corpus.words.words()))
 
-if __name__ == "__main__":
+def main():
     if len(sys.argv) > 1:
         import creature_names as cn
         raw_names = cn.set_to_names(sys.argv[1])
@@ -40,5 +40,8 @@ if __name__ == "__main__":
         raw_names = sys.stdin.read().splitlines()
     wordlist = clean_words()
     names = [TaggedName(name) for name in raw_names]
-    novel = set.union(*[n.novel_words for n in names])
+    novel = set.union(*(n.novel_words for n in names))
     print("\n".join(str(n) for n in names))
+
+if __name__ == "__main__":
+    main()

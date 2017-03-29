@@ -20,7 +20,7 @@ These are some scripts I threw together to study the naming conventions of Magic
 ### Other Scripts
 
 * `creature_names.py`: List just the names of creatures that appear in a given set. You can either pass a set code as an argument (`./creature_names.py THS`) or pass in the entire JSON file for the set on STDIN (`./creature_names < sets/THS.json`).
-* `parse_names.py`: Parse each creature name in a set, and output each name followed by its tags. See `tags` to learn what the tags mean. You can either give it a set code on the command line, or a JSON file as input, like the above.
+* `parse_names.py`: Parse each creature name in a set, and output each name followed by its tags. See `tags` to learn what the tags mean. You can either give it a set code on the command line, or a set of names on STDIN (for example, the output of `creature_names.py`, which is what `tag_sets.sh` does).
 
 
 ### Static Files

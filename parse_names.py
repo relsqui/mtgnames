@@ -9,7 +9,7 @@ wordlist = None
 class TaggedName(object):
     def __init__(self, name):
         self.name = name
-        self.tagged = nltk.pos_tag(nltk.word_tokenize(name))
+        self.tagged = nltk.pos_tag(nltk.word_tokenize(name.lower()))
         self.novel_words = set()
         self.modified = map(self.retag, self.tagged)
 
@@ -83,7 +83,7 @@ def main():
     else:
         raw_names = sys.stdin.read().splitlines()
     names = [TaggedName(name) for name in raw_names]
-    novel = set.union(*(n.novel_words for n in names))
+    novel = set.union(set(), *(n.novel_words for n in names))
     print("\n".join(str(n) for n in names))
 
 if __name__ == "__main__":

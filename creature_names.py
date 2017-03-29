@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import sys
 import os
@@ -11,7 +11,7 @@ def set_to_names(code):
 
 def creature_names(data):
     return [c["name"] for c in json.loads(data)["cards"]
-            if "Creature" in c["types"]]
+            if "Creature" in c.get("types", [])]
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
